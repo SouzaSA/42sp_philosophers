@@ -6,14 +6,13 @@
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 11:39:56 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/03/18 12:08:50 by sde-alva         ###   ########.fr       */
+/*   Updated: 2022/03/18 12:28:34 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_philo.h"
 
 static int	ft_load_stats(t_stats *stats, int argc, char **argv);
-static int	ft_load_philos(t_philo **philos, t_stats *stats);
 
 int	ft_load_table(int argc, char **argv, t_table *table)
 {

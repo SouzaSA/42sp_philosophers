@@ -1,1 +1,1 @@
-# 42so_philosophers
+# 42sp_philosophers

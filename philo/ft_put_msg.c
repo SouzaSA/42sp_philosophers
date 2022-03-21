@@ -1,35 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_main.c                                          :+:      :+:    :+:   */
+/*   ft_put_msg.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/18 11:40:17 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/03/20 19:47:00 by sde-alva         ###   ########.fr       */
+/*   Created: 2022/03/19 19:52:27 by sde-alva          #+#    #+#             */
+/*   Updated: 2022/03/20 21:30:46 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_philo.h"
 
-int	main(int argc, char **argv)
+void	ft_put_msg(t_table *table, char *msg, t_philo *philo)
 {
-	t_table	table;
+	long	time;
 
-	if ((argc == 5 || argc == 6) && ft_check_args(argv))
-	{
-		if (ft_load_table(argc, argv, &table))
-		{
-			write(2, "error: can't load variables\n", 29);
-			return (1);
-		}
-		ft_philosophers(&table);
-	}
-	else
-	{
-		write(2, "error: invalid parameters\n", 27);
-		return (1);
-	}
-	ft_destroy_table(&table);
-	return (0);
+	if (table->dead_flag)
+		return ;
+	pthread_mutex_lock(&table->mtx);
+	time = ft_get_time_msec() - philo->time_stamp;
+	printf("%ld %3d %s\n", time, philo->id, msg);
+	pthread_mutex_unlock(&table->mtx);
 }

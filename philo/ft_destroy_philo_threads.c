@@ -1,35 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_main.c                                          :+:      :+:    :+:   */
+/*   ft_destroy_philo_threads.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/18 11:40:17 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/03/20 19:47:00 by sde-alva         ###   ########.fr       */
+/*   Created: 2022/03/20 18:52:54 by sde-alva          #+#    #+#             */
+/*   Updated: 2022/03/20 19:42:14 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_philo.h"
 
-int	main(int argc, char **argv)
+void	ft_destroy_philo_threads(t_table *table, int amount)
 {
-	t_table	table;
+	int	i;
 
-	if ((argc == 5 || argc == 6) && ft_check_args(argv))
+	i = 0;
+	while (i < amount)
 	{
-		if (ft_load_table(argc, argv, &table))
-		{
-			write(2, "error: can't load variables\n", 29);
-			return (1);
-		}
-		ft_philosophers(&table);
+		pthread_detach(table->philos[i].phi_t);
+		i++;
 	}
-	else
-	{
-		write(2, "error: invalid parameters\n", 27);
-		return (1);
-	}
-	ft_destroy_table(&table);
-	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 11:39:56 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/03/20 21:11:40 by sde-alva         ###   ########.fr       */
+/*   Updated: 2022/03/21 10:54:27 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,19 @@ static int	ft_init_forks_mutex(t_table *table);
 
 int	ft_load_table(int argc, char **argv, t_table *table)
 {
+	table->dead_flag = 0;
 	if (ft_load_stats(&table->stats, argc, argv) == 0)
 	{
-		if (ft_load_philos(&table->philos, &table->stats))
+		if (pthread_mutex_init(&table->print_mtx, NULL))
 			return (1);
-		if (pthread_mutex_init(&table->mtx, NULL))
+		if (ft_init_forks_mutex(table))
 			return (1);
-		table->dead_flag = 0;
-		table->forks_mtx = (pthread_mutex_t *)malloc(table->stats.num_philo \
-			* sizeof(pthread_mutex_t));
-		if (ft_init_forks_mutex(table) == 0)
-			return (0);
-		else
-		{
-			pthread_mutex_destroy(&table->mtx);
+		if (ft_load_philos(table, &table->philos, &table->stats))
 			return (1);
-		}
 	}
 	else
 		return (1);
+	return (0);
 }
 
 static int	ft_load_stats(t_stats *stats, int argc, char **argv)
@@ -56,9 +50,14 @@ static int	ft_load_stats(t_stats *stats, int argc, char **argv)
 
 static int	ft_init_forks_mutex(t_table *table)
 {
-	int	i;
+	int		i;
+	long	size;
 
 	i = 0;
+	size = table->stats.num_philo * sizeof(pthread_mutex_t);
+	table->forks_mtx = (pthread_mutex_t *)malloc(size);
+	if (!table->forks_mtx)
+		return (1);
 	while (i < table->stats.num_philo)
 	{
 		if (pthread_mutex_init(&table->forks_mtx[i], NULL))

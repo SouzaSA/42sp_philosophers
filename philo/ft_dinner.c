@@ -6,47 +6,45 @@
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 18:45:15 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/03/20 21:41:03 by sde-alva         ###   ########.fr       */
+/*   Updated: 2022/03/21 11:12:45 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_philo.h"
 
-static void	ft_philo_actions(t_table *table, int philo_id);
+static void	ft_philo_actions(t_philo *philo);
 static void	ft_msleep(long sleep_time);
 
-void	*ft_dinner(void *table_void)
+void	*ft_dinner(void *philo_void)
 {
-	int		id;
-	t_table	*table;
+	t_philo	*philo;
 
-	table = (t_table *)table_void;
-	id = table->pth_id;
-	if (id % 2 == 0)
+	philo = (t_philo *)philo_void;
+	if (philo->id % 2 == 0)
 		usleep(100);
-	ft_philo_actions(table, id);
+	ft_philo_actions(philo);
 	return (NULL);
 }
 
-static void	ft_philo_actions(t_table *table, int philo_id)
+static void	ft_philo_actions(t_philo *philo)
 {
-	table->philos[philo_id].time_meal = ft_get_time_msec();
-	//ft_put_msg(table, "is thinking", &table->philos[philo_id]);
-	while (!table->dead_flag)
+	philo->time_meal = ft_get_time_msec();
+	ft_put_msg("is thinking", philo);
+	while (!(*philo->dead_flag))
 	{
-		pthread_mutex_lock(&table->forks_mtx[philo_id]);
-		ft_put_msg(table, "has taken a fork", &table->philos[philo_id]);
-		pthread_mutex_lock(&table->forks_mtx[(philo_id + 1) % table->stats.num_philo]);
-		ft_put_msg(table, "has taken a fork", &table->philos[philo_id]);
-		table->philos[philo_id].time_meal = ft_get_time_msec();
-		ft_put_msg(table, "is eating", &table->philos[philo_id]);
-		table->philos[philo_id].philo_meals++;
-		ft_msleep(table->stats.time_to_eat);
-		pthread_mutex_unlock(&table->forks_mtx[philo_id]);
-		pthread_mutex_unlock(&table->forks_mtx[(philo_id + 1) % table->stats.num_philo]);
-		ft_put_msg(table, "is sleeping", &table->philos[philo_id]);
-		ft_msleep(table->stats.time_to_sleep);
-		ft_put_msg(table, "is thinking", &table->philos[philo_id]);
+		pthread_mutex_lock(philo->left_fork);
+		ft_put_msg("has taken a fork", philo);
+		pthread_mutex_lock(philo->right_fork);
+		ft_put_msg("has taken a fork", philo);
+		philo->time_meal = ft_get_time_msec();
+		ft_put_msg("is eating", philo);
+		philo->philo_meals++;
+		ft_msleep(philo->stats->time_to_eat);
+		pthread_mutex_unlock(philo->left_fork);
+		pthread_mutex_unlock(philo->right_fork);
+		ft_put_msg("is sleeping", philo);
+		ft_msleep(philo->stats->time_to_sleep);
+		ft_put_msg("is thinking", philo);
 	}
 }
 

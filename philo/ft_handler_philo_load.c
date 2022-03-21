@@ -6,13 +6,13 @@
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 12:08:55 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/03/18 12:09:12 by sde-alva         ###   ########.fr       */
+/*   Updated: 2022/03/21 11:02:58 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_philo.h"
 
-int	ft_load_philos(t_philo **philos, t_stats *stats)
+int	ft_load_philos(t_table *table, t_philo **philos, t_stats *stats)
 {
 	int	i;
 
@@ -23,13 +23,15 @@ int	ft_load_philos(t_philo **philos, t_stats *stats)
 		while (i < stats->num_philo)
 		{
 			(*philos)[i].id = i + 1;
+			(*philos)[i].dead_flag = &table->dead_flag;
 			(*philos)[i].philo_meals = 0;
-			(*philos)[i].philo_status = THINKING;
 			(*philos)[i].time_meal = ft_get_time_msec();
 			(*philos)[i].time_dead = ft_get_time_msec();
-			(*philos)[i].time_sleep = ft_get_time_msec();
-			(*philos)[i].time_stamp = ft_get_time_msec();
 			(*philos)[i].time_start = ft_get_time_msec();
+			(*philos)[i].stats = &table->stats;
+			(*philos)[i].left_fork = &table->forks_mtx[i];
+			(*philos)[i].right_fork = &table->forks_mtx[(i + 1) % stats->num_philo];
+			(*philos)[i].print_mtx = &table->print_mtx;
 			i++;
 		}
 	}

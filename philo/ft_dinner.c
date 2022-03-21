@@ -6,7 +6,7 @@
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 18:45:15 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/03/21 11:12:45 by sde-alva         ###   ########.fr       */
+/*   Updated: 2022/03/21 13:19:37 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ static void	ft_philo_actions(t_philo *philo)
 
 static void	ft_msleep(long sleep_time)
 {
-	long current;
+	long	current;
 
 	current = ft_get_time_msec();
-	usleep((sleep_time - 10) * 1000);
+	usleep((sleep_time - 1) * 1000);
 	while (current + sleep_time > ft_get_time_msec())
 		usleep(50);
 }

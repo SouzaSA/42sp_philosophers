@@ -6,7 +6,7 @@
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 11:47:57 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/03/21 11:15:40 by sde-alva         ###   ########.fr       */
+/*   Updated: 2022/03/21 13:23:48 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	ft_philosophers(t_table	*table)
 	ft_destroy_philo_threads(table, table->stats.num_philo);
 	ft_destroy_forks_mutex(table, table->stats.num_philo);
 	pthread_mutex_destroy(&table->print_mtx);
-	usleep(800000);
 	return (0);
 }
 

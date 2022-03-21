@@ -6,7 +6,7 @@
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 11:40:47 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/03/21 10:55:13 by sde-alva         ###   ########.fr       */
+/*   Updated: 2022/03/21 13:18:35 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ typedef struct s_philo
 	int				*dead_flag;
 	int				philo_meals;
 	long			time_meal;
-	long			time_dead;
-	long			time_start;
+	long			*time_start;
 	t_stats			*stats;
 	pthread_t		phi_t;
 	pthread_mutex_t	*left_fork;
@@ -47,6 +46,7 @@ typedef struct s_philo
 typedef struct s_table
 {
 	int				dead_flag;
+	long			time_start;
 	t_stats			stats;
 	pthread_mutex_t	print_mtx;
 	pthread_mutex_t	*forks_mtx;

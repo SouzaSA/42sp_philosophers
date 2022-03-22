@@ -26,10 +26,10 @@ int ft_init_semaphores(t_semaphores *semaphores, int num_philo)
 
 static int	ft_init_semaphore(sem_t	**sem, char *sem_name, int value)
 {
-	*sem = sem_open(sem_name, O_CREAT | O_EXCL, S_IRWXU, value);
+	sem_unlink(sem_name);
+	*sem = sem_open(sem_name, O_CREAT, S_IRWXU, value);
 	if (*sem == SEM_FAILED)
 	{
-		sem_unlink(sem_name);
 		*sem = sem_open(sem_name, O_CREAT | O_EXCL, S_IRWXU, value);
 		if (*sem == SEM_FAILED)
 			return (1);

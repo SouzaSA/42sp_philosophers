@@ -6,7 +6,7 @@
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 18:27:34 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/03/22 16:22:16 by sde-alva         ###   ########.fr       */
+/*   Updated: 2022/03/22 20:09:11 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	ft_destroy_table(t_table *table);
 int		ft_load_table(int argc, char **argv, t_table *table);
 int 	ft_init_semaphores(t_semaphores *semaphores, int num_philo);
 int		ft_philosophers(t_table	*table);
-void	ft_put_msg(char *msg, t_philo *philo);
+void	ft_put_msg(char *msg, t_philo *philo, int flag);
 size_t	ft_strlen(const char *s);
 
 #endif

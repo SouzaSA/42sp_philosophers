@@ -6,7 +6,7 @@
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 18:49:15 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/03/22 13:46:49 by sde-alva         ###   ########.fr       */
+/*   Updated: 2022/03/22 20:10:39 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,17 @@ void	ft_dinner(t_philo *philo)
 	if (philo->id % 2 == 0)
 		usleep(100);
 	philo->time_meal = ft_get_time_msec();
-	ft_put_msg("is thinking", philo);
+	ft_put_msg("is thinking", philo, 0);
 	if (pthread_create(&philo->phi_t, NULL, &ft_reaper, (void *)philo))
 		exit(1);
 	while (1)
 	{
 		sem_wait(philo->semaphores->sem_fork);
-		ft_put_msg("has taken a fork", philo);
+		ft_put_msg("has taken a fork", philo, 0);
 		sem_wait(philo->semaphores->sem_fork);
-		ft_put_msg("has taken a fork", philo);
+		ft_put_msg("has taken a fork", philo, 0);
 		philo->time_meal = ft_get_time_msec();
-		ft_put_msg("is eating", philo);
+		ft_put_msg("is eating", philo, 0);
 		philo->philo_meals++;
 		if (philo->stats->meals_counter
 			&& philo->philo_meals == philo->stats->num_meals)
@@ -38,9 +38,9 @@ void	ft_dinner(t_philo *philo)
 		ft_msleep(philo->stats->time_to_eat);
 		sem_post(philo->semaphores->sem_fork);
 		sem_post(philo->semaphores->sem_fork);
-		ft_put_msg("is sleeping", philo);
+		ft_put_msg("is sleeping", philo, 0);
 		ft_msleep(philo->stats->time_to_sleep);
-		ft_put_msg("is thinking", philo);
+		ft_put_msg("is thinking", philo, 0);
 	}
 }
 
@@ -54,7 +54,7 @@ static void	*ft_reaper(void *arg)
 		usleep(100);
 		if (philo->time_meal + philo->stats->time_to_die <= ft_get_time_msec())
 		{
-			ft_put_msg("died", philo);
+			ft_put_msg("died", philo, 1);
 			exit(0);
 		}
 	}

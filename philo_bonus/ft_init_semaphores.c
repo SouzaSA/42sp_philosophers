@@ -13,7 +13,7 @@ int ft_init_semaphores(t_semaphores *semaphores, int num_philo)
 		sem_close(semaphores->sem_fork);
 		return (1);
 	}
-	if (ft_init_semaphore(&semaphores->sem_meals, "sem_meals", 1))
+	if (ft_init_semaphore(&semaphores->sem_meals, "sem_meals", 0))
 	{
 		sem_unlink("sem_fork");
 		sem_unlink("sem_print");
@@ -29,10 +29,6 @@ static int	ft_init_semaphore(sem_t	**sem, char *sem_name, int value)
 	sem_unlink(sem_name);
 	*sem = sem_open(sem_name, O_CREAT, S_IRWXU, value);
 	if (*sem == SEM_FAILED)
-	{
-		*sem = sem_open(sem_name, O_CREAT | O_EXCL, S_IRWXU, value);
-		if (*sem == SEM_FAILED)
-			return (1);
-	}
+		return (1);
 	return (0);
 }

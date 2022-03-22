@@ -6,7 +6,7 @@
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 18:27:42 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/03/22 20:50:06 by sde-alva         ###   ########.fr       */
+/*   Updated: 2022/03/22 20:51:36 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int	ft_philosophers(t_table	*table)
 		}
 		else if (table->pid[i] == 0)
 			ft_dinner(&table->philos[i]);
-		else
 
 		i++;
 	}

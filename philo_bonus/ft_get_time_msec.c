@@ -1,39 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_philosophers.c                                  :+:      :+:    :+:   */
+/*   ft_get_time_msec.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/21 18:27:42 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/03/21 21:23:27 by sde-alva         ###   ########.fr       */
+/*   Created: 2022/03/18 11:48:24 by sde-alva          #+#    #+#             */
+/*   Updated: 2022/03/21 18:43:43 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_philo_bonus.h"
 
-int	ft_philosophers(t_table	*table)
+long	ft_get_time_msec(void)
 {
-	int		i;
+	struct timeval	t;
 
-	if (table->stats.meals_counter)
-	{
-		//TODO thread counter
-	}
-	table->pid = ft_calloc(table->stats.num_philo, sizeof(pid_t));
-	i = 0;
-	while (i < table->stats.num_philo)
-	{
-		table->pid[i] = fork();
-		if (table->pid[i] == -1)
-		{
-			free(table->pid);
-			return (1);
-		}
-		else if (table->pid[i] == 0)
-			//TODO call dinner
-		i++;
-	}
-	//TODO parent
-	return (0);
+	gettimeofday(&t, NULL);
+	return ((t.tv_sec * 1000) + (t.tv_usec / 1000));
 }

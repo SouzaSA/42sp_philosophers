@@ -53,6 +53,7 @@ dkms.conf
 
 # Project binary
 /philo
+/philo_bonus
 
 # Vscode config
 .vscode/

@@ -6,7 +6,7 @@
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 18:27:34 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/03/21 21:17:24 by sde-alva         ###   ########.fr       */
+/*   Updated: 2022/03/22 16:22:16 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@
 # include <pthread.h>
 # include <semaphore.h>
 # include <signal.h>
+# include <fcntl.h>
+# include <sys/stat.h>
+# include <sys/wait.h>
 
 typedef struct s_stats
 {
@@ -31,27 +34,45 @@ typedef struct s_stats
 	int		num_meals;
 }	t_stats;
 
+typedef struct s_semaphores
+{
+	sem_t	*sem_fork;
+	sem_t	*sem_print;
+	sem_t	*sem_meals;
+}	t_semaphores;
+
 typedef struct s_philo
 {
-	int			id;
-	int			*dead_flag;
-	int			philo_meals;
-	long		time_meal;
-	long		*time_start;
-	t_stats		*stats;
-	pthread_t	phi_t;
+	int				id;
+	int				philo_meals;
+	long			time_meal;
+	long			*time_start;
+	t_stats			*stats;
+	pthread_t		phi_t;
+	t_semaphores	*semaphores;
 }	t_philo;
 
 typedef struct s_table
 {
-	int			dead_flag;
-	long		time_start;
-	pthread_t	meals_counter;
-	pid_t		*pid;
-	sem_t		*sem_fork;
-	sem_t		*sem_state;
-	sem_t		*sem_meals;
-	t_stats		stats;
-	t_philo		*philos;
+	long			time_start;
+	pthread_t		meals_watcher;
+	t_semaphores	semaphores;
+	pid_t			*pid;
+	t_stats			stats;
+	t_philo			*philos;
 }	t_table;
+
+int		ft_atoi(const char *nptr);
+int		ft_check_args(char **argv);
+void	ft_destroy_semaphores(t_semaphores *semaphores);
+void	ft_dinner(t_philo *philo);
+long	ft_get_time_msec(void);
+int		ft_load_philos(t_table *table, t_philo **philos, t_stats *stats);
+void	ft_destroy_table(t_table *table);
+int		ft_load_table(int argc, char **argv, t_table *table);
+int 	ft_init_semaphores(t_semaphores *semaphores, int num_philo);
+int		ft_philosophers(t_table	*table);
+void	ft_put_msg(char *msg, t_philo *philo);
+size_t	ft_strlen(const char *s);
+
 #endif

@@ -6,7 +6,7 @@
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 11:39:56 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/03/21 16:12:46 by sde-alva         ###   ########.fr       */
+/*   Updated: 2022/03/22 15:33:22 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static int	ft_load_stats(t_stats *stats, int argc, char **argv);
 
 int	ft_load_table(int argc, char **argv, t_table *table)
 {
-	table->dead_flag = 0;
 	table->time_start = ft_get_time_msec();
 	if (ft_load_stats(&table->stats, argc, argv) == 0)
 	{

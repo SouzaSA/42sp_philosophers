@@ -6,7 +6,7 @@
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 18:49:15 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/03/22 20:10:39 by sde-alva         ###   ########.fr       */
+/*   Updated: 2022/03/22 20:41:59 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,11 @@ void	ft_dinner(t_philo *philo)
 	}
 }
 
-static void	*ft_reaper(void *arg)
+static void	*ft_reaper(void *philo_void)
 {
 	t_philo	*philo;
 
-	philo = (t_philo *)arg;
+	philo = (t_philo *)philo_void;
 	while (1)
 	{
 		usleep(100);

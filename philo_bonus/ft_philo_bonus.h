@@ -6,7 +6,7 @@
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 18:27:34 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/03/22 20:09:11 by sde-alva         ###   ########.fr       */
+/*   Updated: 2022/03/23 16:08:23 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@
 # include <fcntl.h>
 # include <sys/stat.h>
 # include <sys/wait.h>
+
+# define SEM_FORK "/sem_fork"
+# define SEM_PRINT "/sem_print"
+# define SEM_MEALS "/sem_meals"
 
 typedef struct s_stats
 {
@@ -50,6 +54,7 @@ typedef struct s_philo
 	t_stats			*stats;
 	pthread_t		phi_t;
 	t_semaphores	*semaphores;
+	struct s_table	*table;
 }	t_philo;
 
 typedef struct s_table

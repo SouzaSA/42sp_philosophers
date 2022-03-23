@@ -6,7 +6,7 @@
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 18:49:15 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/03/22 21:13:08 by sde-alva         ###   ########.fr       */
+/*   Updated: 2022/03/23 16:53:49 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	ft_dinner(t_philo *philo)
 
 static void	*ft_reaper(void *philo_void)
 {
+	int		i = 0;
 	t_philo	*philo;
 
 	philo = (t_philo *)philo_void;
@@ -55,6 +56,16 @@ static void	*ft_reaper(void *philo_void)
 		if (philo->time_meal + philo->stats->time_to_die <= ft_get_time_msec())
 		{
 			ft_put_msg("died", philo, 1);
+			sem_unlink("/sem_fork");
+			sem_unlink("/sem_print");
+			sem_close(philo->semaphores->sem_fork);
+			sem_close(philo->semaphores->sem_print);
+			ft_destroy_table(philo->table);
+			while (i < philo->table->stats.num_philo)
+			{
+				pthread_detach(philo->table->meals_watcher);
+				i++;
+			}
 			exit(0);
 		}
 	}

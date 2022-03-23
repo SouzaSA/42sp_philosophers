@@ -6,7 +6,7 @@
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 12:08:55 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/03/22 12:26:28 by sde-alva         ###   ########.fr       */
+/*   Updated: 2022/03/23 16:08:48 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static void	ft_load_all_philos(t_table *table, t_philo *philos, t_stats *stats)
 		philos[i].time_start = &table->time_start;
 		philos[i].stats = &table->stats;
 		philos[i].semaphores = &table->semaphores;
+		philos[i].table = table;
 		i++;
 	}
 }

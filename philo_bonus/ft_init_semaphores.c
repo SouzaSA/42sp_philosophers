@@ -13,7 +13,7 @@ int ft_init_semaphores(t_semaphores *semaphores, int num_philo)
 		sem_close(semaphores->sem_fork);
 		return (1);
 	}
-	if (ft_init_semaphore(&semaphores->sem_meals, "sem_meals", 0))
+	if (ft_init_semaphore(&semaphores->sem_meals, "sem_meals", 1))
 	{
 		sem_unlink("sem_fork");
 		sem_unlink("sem_print");

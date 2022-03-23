@@ -6,7 +6,7 @@
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 18:27:42 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/03/23 16:51:17 by sde-alva         ###   ########.fr       */
+/*   Updated: 2022/03/23 17:05:15 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ int	ft_philosophers(t_table	*table)
 		i++;
 	}
 	ft_destroy_semaphores(&table->semaphores);
-	printf("\n\n\noi\n\n\n");
 	i = 0;
 	while (i < table->stats.num_philo)
 	{

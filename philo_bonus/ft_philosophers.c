@@ -6,13 +6,14 @@
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 18:27:42 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/03/23 17:05:15 by sde-alva         ###   ########.fr       */
+/*   Updated: 2022/03/23 20:45:15 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_philo_bonus.h"
 
 static void	*ft_meals_watcher(void *table_void);
+static int	ft_create_philo_processess(t_table *table);
 
 int	ft_philosophers(t_table	*table)
 {
@@ -27,35 +28,17 @@ int	ft_philosophers(t_table	*table)
 			return (1);
 	}
 	table->pid = malloc(table->stats.num_philo * sizeof(pid_t));
-	i = 0;
-	while (i < table->stats.num_philo)
-	{
-		table->pid[i] = fork();
-		if (table->pid[i] == -1)
-		{
-			free(table->pid);
-			return (1);
-		}
-		else if (table->pid[i] == 0)
-			ft_dinner(&table->philos[i]);
-
-		i++;
-	}
+	if (ft_create_philo_processess(table))
+		return (1);
 	wait(NULL);
 	i = 0;
 	while (i < table->stats.num_philo)
 	{
-		sem_post(table->semaphores.sem_meals);
-		///kill(table->pid[i], SIGKILL);
+		kill(table->pid[i], SIGKILL);
 		i++;
 	}
 	ft_destroy_semaphores(&table->semaphores);
-	i = 0;
-	while (i < table->stats.num_philo)
-	{
-		pthread_join(table->meals_watcher, NULL);
-		i++;
-	}
+	pthread_join(table->meals_watcher, NULL);
 	ft_destroy_table(table);
 	return (0);
 }
@@ -75,4 +58,24 @@ static void	*ft_meals_watcher(void *table_void)
 	while (--counter >= 0)
 		kill(table->pid[counter], SIGKILL);
 	return (NULL);
+}
+
+static int	ft_create_philo_processess(t_table *table)
+{
+	int	i;
+
+	i = 0;
+	while (i < table->stats.num_philo)
+	{
+		table->pid[i] = fork();
+		if (table->pid[i] == -1)
+		{
+			free(table->pid);
+			return (1);
+		}
+		else if (table->pid[i] == 0)
+			ft_dinner(&table->philos[i]);
+		i++;
+	}
+	return (0);
 }

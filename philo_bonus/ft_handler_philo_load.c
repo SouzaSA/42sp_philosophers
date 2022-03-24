@@ -6,7 +6,7 @@
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 12:08:55 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/03/23 16:08:48 by sde-alva         ###   ########.fr       */
+/*   Updated: 2022/03/23 21:05:49 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,9 @@ static void	ft_load_all_philos(t_table *table, t_philo *philos, t_stats *stats)
 	while (i < stats->num_philo)
 	{
 		philos[i].id = i + 1;
+		philos[i].alive = 1;
 		philos[i].philo_meals = 0;
-		philos[i].time_meal = ft_get_time_msec();
+		philos[i].time_meal = table->time_start;
 		philos[i].time_start = &table->time_start;
 		philos[i].stats = &table->stats;
 		philos[i].semaphores = &table->semaphores;

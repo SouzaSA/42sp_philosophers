@@ -1,10 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_init_semaphores.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/23 19:12:12 by sde-alva          #+#    #+#             */
+/*   Updated: 2022/03/23 19:12:47 by sde-alva         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_philo_bonus.h"
 
 static int	ft_init_semaphore(sem_t	**sem, char *sem_name, int value);
 
-int ft_init_semaphores(t_semaphores *semaphores, int num_philo)
+int	ft_init_semaphores(t_semaphores *semaphores, int num_philo)
 {
-
 	if (ft_init_semaphore(&semaphores->sem_fork, "/sem_fork", num_philo))
 		return (1);
 	if (ft_init_semaphore(&semaphores->sem_print, "/sem_print", 1))

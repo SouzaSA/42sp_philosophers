@@ -6,7 +6,7 @@
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 18:27:34 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/03/23 16:08:23 by sde-alva         ###   ########.fr       */
+/*   Updated: 2022/03/23 19:11:47 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct s_semaphores
 typedef struct s_philo
 {
 	int				id;
+	int				alive;
 	int				philo_meals;
 	long			time_meal;
 	long			*time_start;
@@ -75,7 +76,7 @@ long	ft_get_time_msec(void);
 int		ft_load_philos(t_table *table, t_philo **philos, t_stats *stats);
 void	ft_destroy_table(t_table *table);
 int		ft_load_table(int argc, char **argv, t_table *table);
-int 	ft_init_semaphores(t_semaphores *semaphores, int num_philo);
+int		ft_init_semaphores(t_semaphores *semaphores, int num_philo);
 int		ft_philosophers(t_table	*table);
 void	ft_put_msg(char *msg, t_philo *philo, int flag);
 size_t	ft_strlen(const char *s);

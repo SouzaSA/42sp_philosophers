@@ -6,7 +6,7 @@
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 18:27:42 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/03/23 20:45:15 by sde-alva         ###   ########.fr       */
+/*   Updated: 2022/03/24 19:13:10 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,14 @@ int	ft_philosophers(t_table	*table)
 
 	if (ft_init_semaphores(&table->semaphores, table->stats.num_philo))
 		return (1);
+	if (ft_create_philo_processess(table))
+		return (1);
 	if (table->stats.meals_counter)
 	{
 		if (pthread_create(&table->meals_watcher, NULL, &ft_meals_watcher, \
 			(void *)table))
 			return (1);
 	}
-	table->pid = malloc(table->stats.num_philo * sizeof(pid_t));
-	if (ft_create_philo_processess(table))
-		return (1);
 	wait(NULL);
 	i = 0;
 	while (i < table->stats.num_philo)
@@ -65,6 +64,9 @@ static int	ft_create_philo_processess(t_table *table)
 	int	i;
 
 	i = 0;
+	table->pid = malloc(table->stats.num_philo * sizeof(pid_t));
+	if (!table->pid)
+		return (1);
 	while (i < table->stats.num_philo)
 	{
 		table->pid[i] = fork();

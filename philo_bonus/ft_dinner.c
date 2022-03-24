@@ -6,7 +6,7 @@
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 18:49:15 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/03/23 20:28:43 by sde-alva         ###   ########.fr       */
+/*   Updated: 2022/03/24 20:35:21 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,22 +29,28 @@ void	ft_dinner(t_philo *philo)
 	}
 	ft_put_msg("is thinking", philo, 0);
 	ft_philo_actions(philo);
-	pthread_join(philo->phi_t, NULL);
 	ft_clean_exit(philo);
 }
 
 static void	*ft_reaper(void *philo_void)
 {
+	int		i;
 	t_philo	*philo;
 
 	philo = (t_philo *)philo_void;
 	while (1)
 	{
-		usleep(100);
+		usleep(200);
 		if (philo->time_meal + philo->stats->time_to_die <= ft_get_time_msec())
 		{
 			ft_put_msg("died", philo, 1);
 			philo->alive = 0;
+			i = 0;
+			while (i < philo->table->stats.num_philo)
+			{
+				sem_post(philo->semaphores->sem_meals);
+				i++;
+			}
 			break ;
 		}
 	}
@@ -87,19 +93,11 @@ static void	ft_philo_actions(t_philo *philo)
 
 static void	ft_clean_exit(t_philo *philo)
 {
-	int	i;
-
-	i = 0;
 	sem_unlink("/sem_fork");
 	sem_unlink("/sem_print");
+	sem_unlink("/sem_meals");
 	sem_close(philo->semaphores->sem_fork);
 	sem_close(philo->semaphores->sem_print);
-	while (i < philo->table->stats.num_philo)
-	{
-		sem_post(philo->semaphores->sem_meals);
-		i++;
-	}
-	sem_unlink("/sem_meals");
 	sem_close(philo->semaphores->sem_meals);
 	ft_destroy_table(philo->table);
 	exit(0);

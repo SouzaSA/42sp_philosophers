@@ -6,7 +6,7 @@
 #    By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/19 14:48:03 by sde-alva          #+#    #+#              #
-#    Updated: 2022/03/20 19:53:41 by sde-alva         ###   ########.fr        #
+#    Updated: 2022/03/25 14:41:19 by sde-alva         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@
 NAME				=	philo
 
 CC					=	cc
-CFLAGS				=	-Wall -Wextra -Werror -g
+CFLAGS				=	-Wall -Wextra -Werror
 LIBS				=	-l pthread
 
 SRCS				=	ft_atoi.c	\

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_philosophers.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 18:27:42 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/03/24 19:13:10 by sde-alva         ###   ########.fr       */
+/*   Updated: 2022/03/25 01:15:07 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,9 @@ int	ft_philosophers(t_table	*table)
 		return (1);
 	if (ft_create_philo_processess(table))
 		return (1);
-	if (table->stats.meals_counter)
-	{
-		if (pthread_create(&table->meals_watcher, NULL, &ft_meals_watcher, \
-			(void *)table))
-			return (1);
-	}
+	if (pthread_create(&table->meals_watcher, NULL, &ft_meals_watcher, \
+		(void *)table))
+		return (1);
 	wait(NULL);
 	i = 0;
 	while (i < table->stats.num_philo)

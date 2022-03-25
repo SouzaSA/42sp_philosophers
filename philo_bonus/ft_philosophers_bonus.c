@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_philosophers.c                                  :+:      :+:    :+:   */
+/*   ft_philosophers_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 18:27:42 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/03/25 01:15:07 by coder            ###   ########.fr       */
+/*   Updated: 2022/03/25 15:08:12 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	ft_philosophers(t_table	*table)
 
 	if (ft_init_semaphores(&table->semaphores, table->stats.num_philo))
 		return (1);
+    table->time_start = ft_get_time_msec();
 	if (ft_create_philo_processess(table))
 		return (1);
 	if (pthread_create(&table->meals_watcher, NULL, &ft_meals_watcher, \

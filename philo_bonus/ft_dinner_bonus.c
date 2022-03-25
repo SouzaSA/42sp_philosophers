@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_dinner.c                                        :+:      :+:    :+:   */
+/*   ft_dinner_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 18:49:15 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/03/24 20:35:21 by sde-alva         ###   ########.fr       */
+/*   Updated: 2022/03/25 15:11:02 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	ft_clean_exit(t_philo *philo);
 void	ft_dinner(t_philo *philo)
 {
 	if (philo->id % 2 == 0)
-		usleep(100);
+		usleep(500);
 	philo->time_meal = ft_get_time_msec();
 	if (pthread_create(&philo->phi_t, NULL, &ft_reaper, (void *)philo))
 	{

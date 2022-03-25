@@ -1,26 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_put_msg.c                                       :+:      :+:    :+:   */
+/*   ft_main_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/19 19:52:27 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/03/23 21:09:43 by sde-alva         ###   ########.fr       */
+/*   Created: 2022/03/21 18:26:57 by sde-alva          #+#    #+#             */
+/*   Updated: 2022/03/25 14:37:21 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_philo_bonus.h"
 
-void	ft_put_msg(char *msg, t_philo *philo, int flag)
+int	main(int argc, char **argv)
 {
-	long	delta_time;
+	t_table	table;
 
-	if (!philo->alive)
-		return ;
-	sem_wait(philo->semaphores->sem_print);
-	delta_time = ft_get_time_msec() - *philo->time_start;
-	printf("%8ld %3d %s\n", delta_time, philo->id, msg);
-	if (!flag)
-		sem_post(philo->semaphores->sem_print);
+	memset(&table, 0, sizeof(t_table));
+	if ((argc == 5 || argc == 6) && ft_check_args(argv))
+	{
+		if (ft_load_table(argc, argv, &table))
+		{
+			write(2, "error: can't load variables\n", 29);
+			return (1);
+		}
+		ft_philosophers(&table);
+	}
+	else
+	{
+		write(2, "error: invalid parameters\n", 27);
+		return (1);
+	}
+	ft_destroy_table(&table);
+	return (0);
 }

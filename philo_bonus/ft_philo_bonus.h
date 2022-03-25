@@ -6,7 +6,7 @@
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 18:27:34 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/03/23 19:11:47 by sde-alva         ###   ########.fr       */
+/*   Updated: 2022/03/25 14:38:03 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,6 @@
 # include <fcntl.h>
 # include <sys/stat.h>
 # include <sys/wait.h>
-
-# define SEM_FORK "/sem_fork"
-# define SEM_PRINT "/sem_print"
-# define SEM_MEALS "/sem_meals"
 
 typedef struct s_stats
 {

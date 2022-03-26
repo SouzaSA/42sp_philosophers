@@ -6,13 +6,13 @@
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 18:27:42 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/03/25 15:08:12 by sde-alva         ###   ########.fr       */
+/*   Updated: 2022/03/26 19:44:07 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_philo_bonus.h"
 
-static void	*ft_meals_watcher(void *table_void);
+static void	*ft_waiter(void *table_void);
 static int	ft_create_philo_processess(t_table *table);
 
 int	ft_philosophers(t_table	*table)
@@ -21,11 +21,10 @@ int	ft_philosophers(t_table	*table)
 
 	if (ft_init_semaphores(&table->semaphores, table->stats.num_philo))
 		return (1);
-    table->time_start = ft_get_time_msec();
+	table->time_start = ft_get_time_msec();
 	if (ft_create_philo_processess(table))
 		return (1);
-	if (pthread_create(&table->meals_watcher, NULL, &ft_meals_watcher, \
-		(void *)table))
+	if (pthread_create(&table->meals_watcher, NULL, &ft_waiter, (void *)table))
 		return (1);
 	wait(NULL);
 	i = 0;
@@ -40,7 +39,7 @@ int	ft_philosophers(t_table	*table)
 	return (0);
 }
 
-static void	*ft_meals_watcher(void *table_void)
+static void	*ft_waiter(void *table_void)
 {
 	t_table	*table;
 	int		counter;

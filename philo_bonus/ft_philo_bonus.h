@@ -6,7 +6,7 @@
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 18:27:34 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/03/25 14:38:03 by sde-alva         ###   ########.fr       */
+/*   Updated: 2022/03/26 15:51:05 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_semaphores
 typedef struct s_philo
 {
 	int				id;
-	int				alive;
+	int				keep_dinning;
 	int				philo_meals;
 	long			time_meal;
 	long			*time_start;

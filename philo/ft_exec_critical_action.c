@@ -6,7 +6,7 @@
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 19:52:27 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/03/28 00:12:21 by sde-alva         ###   ########.fr       */
+/*   Updated: 2022/03/28 00:19:26 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_exec_critical_action(char *msg, t_philo *philo, int status_flag)
 		if (status_flag == PHILO_DIED)
 			*philo->dead_flag = 1;
 		delta_time = ft_get_time_msec() - *philo->time_start;
-		printf("%-5ld %2d %s\n", delta_time, philo->id, msg);	
+		printf("%-5ld %2d %s\n", delta_time, philo->id, msg);
 	}
 	pthread_mutex_unlock(philo->critical_mtx);
 }

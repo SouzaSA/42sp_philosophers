@@ -6,14 +6,14 @@
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 18:45:15 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/03/27 23:52:26 by sde-alva         ###   ########.fr       */
+/*   Updated: 2022/03/28 00:19:47 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_philo.h"
 
 static void	ft_philo_actions(t_philo *philo);
-static void ft_take_forks(t_philo *philo);
+static void	ft_take_forks(t_philo *philo);
 static void	ft_msleep(long sleep_time);
 
 void	*ft_dinner(void *philo_void)
@@ -50,7 +50,7 @@ static void	ft_philo_actions(t_philo *philo)
 	}
 }
 
-static void ft_take_forks(t_philo *philo)
+static void	ft_take_forks(t_philo *philo)
 {
 	if (philo->id % 2 == 0)
 		pthread_mutex_lock(philo->left_fork);

@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_put_msg.c                                       :+:      :+:    :+:   */
+/*   ft_get_last_meal_time.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/19 19:52:27 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/03/27 01:38:09 by sde-alva         ###   ########.fr       */
+/*   Created: 2022/03/27 23:10:01 by sde-alva          #+#    #+#             */
+/*   Updated: 2022/03/27 23:40:08 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_philo.h"
 
-void	ft_put_msg(char *msg, t_philo *philo)
+void	ft_get_last_meal_time(t_philo *philo, long *time)
 {
-	long	delta_time;
-
-	if (*philo->dead_flag || (philo->stats->meals_counter \
-		&& philo->philo_meals >= philo->stats->num_meals))
-		return ;
-	pthread_mutex_lock(philo->print_mtx);
-	delta_time = ft_get_time_msec() - *philo->time_start;
-	printf("%8ld %3d %s\n", delta_time, philo->id, msg);
-	pthread_mutex_unlock(philo->print_mtx);
+	pthread_mutex_lock(&philo->meal_mtx);
+	*time = philo->time_meal;
+	pthread_mutex_unlock(&philo->meal_mtx);
 }

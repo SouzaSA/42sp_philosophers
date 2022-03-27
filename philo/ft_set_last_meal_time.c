@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_destroy_philo_threads.c                         :+:      :+:    :+:   */
+/*   ft_set_last_meal_time.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/20 18:52:54 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/03/28 00:04:08 by sde-alva         ###   ########.fr       */
+/*   Created: 2022/03/27 23:10:21 by sde-alva          #+#    #+#             */
+/*   Updated: 2022/03/27 23:43:28 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_philo.h"
 
-void	ft_destroy_philo_threads(t_table *table, int amount)
+void	ft_set_last_meal(t_philo *philo)
 {
-	int	i;
-
-	i = 0;
-	ft_set_death_flag(&table->dead_flag, &table->death_mtx);
-	while (i < amount)
-	{
-		pthread_join(table->philos[i].phi_t, NULL);
-		i++;
-	}
+	pthread_mutex_lock(&philo->meal_mtx);
+	philo->philo_meals++;
+	philo->time_meal = ft_get_time_msec();
+	pthread_mutex_unlock(&philo->meal_mtx);
 }

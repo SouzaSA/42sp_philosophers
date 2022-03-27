@@ -6,14 +6,14 @@
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 18:45:15 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/03/28 00:19:47 by sde-alva         ###   ########.fr       */
+/*   Updated: 2022/03/28 01:19:23 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_philo.h"
 
 static void	ft_philo_actions(t_philo *philo);
-static void	ft_take_forks(t_philo *philo);
+static int	ft_take_forks(t_philo *philo);
 static void	ft_msleep(long sleep_time);
 
 void	*ft_dinner(void *philo_void)
@@ -24,7 +24,6 @@ void	*ft_dinner(void *philo_void)
 	if (philo->id % 2 == 1)
 		usleep(100);
 	ft_philo_actions(philo);
-	pthread_mutex_destroy(&philo->meal_mtx);
 	return (NULL);
 }
 
@@ -32,12 +31,13 @@ static void	ft_philo_actions(t_philo *philo)
 {
 	int	dead_flag;
 
-	ft_get_death_flag(philo, &dead_flag);
+	dead_flag = 0;
 	ft_exec_critical_action("is thinking", philo, PHILO_ALIVE);
 	while (!dead_flag)
 	{
 		usleep(200);
-		ft_take_forks(philo);
+		if (ft_take_forks(philo))
+			break ;
 		ft_exec_critical_action("is eating", philo, PHILO_ALIVE);
 		ft_set_last_meal(philo);
 		ft_msleep(philo->stats->time_to_eat);
@@ -50,8 +50,13 @@ static void	ft_philo_actions(t_philo *philo)
 	}
 }
 
-static void	ft_take_forks(t_philo *philo)
+static int	ft_take_forks(t_philo *philo)
 {
+	if (philo->stats->num_philo == 1)
+	{
+		ft_msleep(philo->stats->time_to_die + 1);
+		return (1);
+	}
 	if (philo->id % 2 == 0)
 		pthread_mutex_lock(philo->left_fork);
 	else
@@ -62,6 +67,7 @@ static void	ft_take_forks(t_philo *philo)
 	else
 		pthread_mutex_lock(philo->left_fork);
 	ft_exec_critical_action("has taken a fork", philo, PHILO_ALIVE);
+	return (0);
 }
 
 static void	ft_msleep(long sleep_time)

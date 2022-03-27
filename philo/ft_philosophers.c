@@ -6,7 +6,7 @@
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 11:47:57 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/03/28 01:13:04 by sde-alva         ###   ########.fr       */
+/*   Updated: 2022/03/28 01:40:11 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,12 @@ static int	ft_create_philo_threads(t_table *table)
 			ft_destroy_philo_threads(table, i);
 			return (1);
 		}
+		i++;
+	}
+	i = 0;
+	while ((int)i < table->stats.num_philo)
+	{
+		ft_set_last_meal_time(&table->philos[i]);
 		i++;
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 11:40:47 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/03/28 00:09:48 by sde-alva         ###   ########.fr       */
+/*   Updated: 2022/03/28 01:30:12 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int		ft_load_philos(t_table *table, t_philo **philos, t_stats *stats);
 int		ft_philosophers(t_table	*table);
 void	ft_exec_critical_action(char *msg, t_philo *philo, int status_flag);
 void	ft_set_death_flag(int *dead_flag, pthread_mutex_t *death_mtx);
+void	ft_set_last_meal_time(t_philo *philo);
 void	ft_set_last_meal(t_philo *philo);
 size_t	ft_strlen(const char *s);
 

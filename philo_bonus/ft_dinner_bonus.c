@@ -6,7 +6,7 @@
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 18:49:15 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/03/26 23:19:33 by sde-alva         ###   ########.fr       */
+/*   Updated: 2022/03/28 01:56:40 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,12 @@ static void	ft_philo_actions(t_philo *philo)
 	while (1)
 	{
 		usleep(100);
-		sem_wait(philo->semaphores->sem_fork);
 		ft_put_msg("has taken a fork", philo, 0);
 		sem_wait(philo->semaphores->sem_fork);
 		ft_put_msg("has taken a fork", philo, 0);
-		philo->time_meal = ft_get_time_msec();
+		sem_wait(philo->semaphores->sem_fork);
 		ft_put_msg("is eating", philo, 0);
-		philo->philo_meals++;
+		ft_set_last_meal(philo);
 		if (philo->stats->meals_counter
 			&& philo->philo_meals == philo->stats->num_meals)
 		{

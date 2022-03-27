@@ -18,6 +18,8 @@ SRCS				=	ft_atoi_bonus.c	\
 						ft_main_bonus.c	\
 						ft_philosophers_bonus.c	\
 						ft_put_msg_bonus.c	\
+						ft_set_last_meal_bonus.c	\
+						ft_set_last_meal_time_bonus.c	\
 						ft_strlen_bonus.c
 
 RM					=	@rm -rf

@@ -1,36 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_main_bonus.c                                    :+:      :+:    :+:   */
+/*   ft_set_last_meal_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/21 18:26:57 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/03/28 01:48:48 by sde-alva         ###   ########.fr       */
+/*   Created: 2022/03/27 23:10:21 by sde-alva          #+#    #+#             */
+/*   Updated: 2022/03/28 01:57:03 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_philo_bonus.h"
 
-int	main(int argc, char **argv)
+void	ft_set_last_meal(t_philo *philo)
 {
-	t_table	table;
-
-	memset(&table, 0, sizeof(t_table));
-	if ((argc == 5 || argc == 6) && ft_check_args(argv))
-	{
-		if (ft_load_table(argc, argv, &table))
-		{
-			write(2, "error: invalid variables\n", 29);
-			return (1);
-		}
-		ft_philosophers(&table);
-	}
-	else
-	{
-		write(2, "error: invalid parameters\n", 27);
-		return (1);
-	}
-	ft_destroy_table(&table);
-	return (0);
+	pthread_mutex_lock(&philo->meal_mtx);
+	philo->philo_meals++;
+	philo->time_meal = ft_get_time_msec();
+	pthread_mutex_unlock(&philo->meal_mtx);
 }

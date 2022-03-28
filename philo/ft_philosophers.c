@@ -6,7 +6,7 @@
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 11:47:57 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/03/28 01:40:11 by sde-alva         ###   ########.fr       */
+/*   Updated: 2022/03/28 12:49:52 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	ft_philosophers(t_table	*table)
 	ft_destroy_philo_threads(table, table->stats.num_philo);
 	ft_destroy_forks_mutex(table, table->stats.num_philo);
 	pthread_mutex_destroy(&table->critical_mtx);
-	pthread_mutex_destroy(&table->death_mtx);
 	return (0);
 }
 
@@ -64,7 +63,8 @@ static int	ft_dinner_checker(t_table *table)
 		ft_get_last_meal_time(&table->philos[i], &last_meal);
 		if (last_meal + table->stats.time_to_die <= ft_get_time_msec())
 		{
-			ft_exec_critical_action("died", &table->philos[i], PHILO_DIED);
+			ft_print_action("died", &table->philos[i]);
+			ft_set_death_flag(&table->dead_flag, &table->critical_mtx);
 			break ;
 		}
 		if (table->stats.meals_counter && !ft_meals_checker(table))

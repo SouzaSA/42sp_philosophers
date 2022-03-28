@@ -6,7 +6,7 @@
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 18:45:15 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/03/28 01:42:56 by sde-alva         ###   ########.fr       */
+/*   Updated: 2022/03/28 12:36:03 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,20 @@ static void	ft_philo_actions(t_philo *philo)
 	int	dead_flag;
 
 	dead_flag = 0;
-	ft_exec_critical_action("is thinking", philo, PHILO_ALIVE);
+	ft_print_action("is thinking", philo);
 	while (!dead_flag)
 	{
 		usleep(200);
 		if (ft_take_forks(philo))
 			break ;
-		ft_exec_critical_action("is eating", philo, PHILO_ALIVE);
+		ft_print_action("is eating", philo);
 		ft_set_last_meal(philo);
 		ft_msleep(philo->stats->time_to_eat);
 		pthread_mutex_unlock(philo->right_fork);
 		pthread_mutex_unlock(philo->left_fork);
-		ft_exec_critical_action("is sleeping", philo, PHILO_ALIVE);
+		ft_print_action("is sleeping", philo);
 		ft_msleep(philo->stats->time_to_sleep);
-		ft_exec_critical_action("is thinking", philo, PHILO_ALIVE);
+		ft_print_action("is thinking", philo);
 		ft_get_death_flag(philo, &dead_flag);
 	}
 }
@@ -61,12 +61,12 @@ static int	ft_take_forks(t_philo *philo)
 		pthread_mutex_lock(philo->left_fork);
 	else
 		pthread_mutex_lock(philo->right_fork);
-	ft_exec_critical_action("has taken a fork", philo, PHILO_ALIVE);
+	ft_print_action("has taken a fork", philo);
 	if (philo->id % 2 == 0)
 		pthread_mutex_lock(philo->right_fork);
 	else
 		pthread_mutex_lock(philo->left_fork);
-	ft_exec_critical_action("has taken a fork", philo, PHILO_ALIVE);
+	ft_print_action("has taken a fork", philo);
 	return (0);
 }
 

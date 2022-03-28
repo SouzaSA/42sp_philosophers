@@ -6,7 +6,7 @@
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 12:08:55 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/03/27 22:17:45 by sde-alva         ###   ########.fr       */
+/*   Updated: 2022/03/28 12:27:26 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ static void	ft_load_all_philos(t_table *table, t_philo *philos, t_stats *stats)
 		philos[i].left_fork = &table->forks_mtx[i];
 		philos[i].right_fork = &table->forks_mtx[(i + 1) % stats->num_philo];
 		philos[i].critical_mtx = &table->critical_mtx;
-		philos[i].death_mtx = &table->death_mtx;
-		pthread_mutex_init(&philos[i].meal_mtx, NULL);
 		i++;
 	}
 }

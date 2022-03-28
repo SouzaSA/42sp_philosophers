@@ -6,7 +6,7 @@
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 11:39:56 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/03/28 01:17:48 by sde-alva         ###   ########.fr       */
+/*   Updated: 2022/03/28 12:27:12 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ int	ft_load_table(int argc, char **argv, t_table *table)
 	if (ft_load_stats(&table->stats, argc, argv) == 0)
 	{
 		if (pthread_mutex_init(&table->critical_mtx, NULL))
-			return (1);
-		if (pthread_mutex_init(&table->death_mtx, NULL))
 			return (1);
 		if (ft_init_forks_mutex(table))
 			return (1);

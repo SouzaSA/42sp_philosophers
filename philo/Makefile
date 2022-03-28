@@ -6,7 +6,7 @@
 #    By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/19 14:48:03 by sde-alva          #+#    #+#              #
-#    Updated: 2022/03/28 01:45:01 by sde-alva         ###   ########.fr        #
+#    Updated: 2022/03/28 12:34:47 by sde-alva         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 
 NAME				=	philo
 
-CC					=	cc -fsanitize=thread -g3
+CC					=	cc -g # -fsanitize=thread -g3
 CFLAGS				=	-Wall -Wextra -Werror
 LIBS				=	-l pthread
 
@@ -23,7 +23,6 @@ SRCS				=	ft_atoi.c	\
 						ft_destroy_forks_mutex.c	\
 						ft_destroy_philo_threads.c	\
 						ft_dinner.c	\
-						ft_exec_critical_action.c	\
 						ft_get_death_flag.c	\
 						ft_get_last_meal_time.c	\
 						ft_get_num_meals.c	\
@@ -33,6 +32,7 @@ SRCS				=	ft_atoi.c	\
 						ft_handler_table_load.c	\
 						ft_main.c	\
 						ft_philosophers.c	\
+						ft_print_action.c	\
 						ft_set_death_flag.c	\
 						ft_set_last_meal_time.c	\
 						ft_set_last_meal.c	\

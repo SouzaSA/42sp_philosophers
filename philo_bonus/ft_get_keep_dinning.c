@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_destroy_semaphores_bonus.c                      :+:      :+:    :+:   */
+/*   ft_get_keep_dinning.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/23 19:13:09 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/03/28 12:57:36 by sde-alva         ###   ########.fr       */
+/*   Created: 2022/03/27 23:10:01 by sde-alva          #+#    #+#             */
+/*   Updated: 2022/03/28 13:34:34 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_philo_bonus.h"
 
-void	ft_destroy_semaphores(t_semaphores *semaphores)
+void	ft_get_keep_dinnig(t_philo *philo, int *dinning)
 {
-	sem_unlink("/sem_fork");
-	sem_unlink("/sem_critical");
-	sem_unlink("/sem_meals");
-	sem_close(semaphores->sem_fork);
-	sem_close(semaphores->sem_critical);
-	sem_close(semaphores->sem_meals);
+	sem_wait(philo->semaphores->sem_critical);
+	*dinning = philo->keep_dinning;
+	sem_post(philo->semaphores->sem_critical);
 }

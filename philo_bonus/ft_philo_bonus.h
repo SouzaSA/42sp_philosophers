@@ -6,7 +6,7 @@
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 18:27:34 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/03/28 01:55:20 by sde-alva         ###   ########.fr       */
+/*   Updated: 2022/03/28 15:43:10 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct s_stats
 typedef struct s_semaphores
 {
 	sem_t	*sem_fork;
-	sem_t	*sem_print;
+	sem_t	*sem_critical;
 	sem_t	*sem_meals;
 }	t_semaphores;
 
@@ -66,17 +66,23 @@ typedef struct s_table
 
 int		ft_atoi(const char *nptr);
 int		ft_check_args(char **argv);
+void	ft_clean_exit(t_philo *philo);
 void	ft_destroy_semaphores(t_semaphores *semaphores);
 void	ft_dinner(t_philo *philo);
+void	ft_get_keep_dinnig(t_philo *philo, int *dinning);
+void	ft_get_last_meal_time(t_philo *philo, long *time);
+void	ft_get_last_meal_num(t_philo *philo, int *num);
 long	ft_get_time_msec(void);
 int		ft_load_philos(t_table *table, t_philo **philos, t_stats *stats);
 void	ft_destroy_table(t_table *table);
 int		ft_load_table(int argc, char **argv, t_table *table);
 int		ft_init_semaphores(t_semaphores *semaphores, int num_philo);
 int		ft_philosophers(t_table	*table);
+void	ft_msleep(long sleep_time);
+void	ft_put_msg(char *msg, t_philo *philo);
+void	ft_set_keep_dinning(t_philo *philo);
 void	ft_set_last_meal_time(t_philo *philo);
 void	ft_set_last_meal(t_philo *philo);
-void	ft_put_msg(char *msg, t_philo *philo, int flag);
 size_t	ft_strlen(const char *s);
 
 #endif

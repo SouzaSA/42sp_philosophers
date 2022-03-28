@@ -6,7 +6,7 @@
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 18:27:42 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/03/26 19:44:07 by sde-alva         ###   ########.fr       */
+/*   Updated: 2022/03/28 15:40:35 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ static int	ft_create_philo_processess(t_table *table);
 
 int	ft_philosophers(t_table	*table)
 {
-	int		i;
-
 	if (ft_init_semaphores(&table->semaphores, table->stats.num_philo))
 		return (1);
 	table->time_start = ft_get_time_msec();
@@ -27,12 +25,6 @@ int	ft_philosophers(t_table	*table)
 	if (pthread_create(&table->meals_watcher, NULL, &ft_waiter, (void *)table))
 		return (1);
 	wait(NULL);
-	i = 0;
-	while (i < table->stats.num_philo)
-	{
-		kill(table->pid[i], SIGKILL);
-		i++;
-	}
 	ft_destroy_semaphores(&table->semaphores);
 	pthread_join(table->meals_watcher, NULL);
 	ft_destroy_table(table);

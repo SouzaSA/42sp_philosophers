@@ -6,7 +6,7 @@
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 19:12:12 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/03/25 14:37:18 by sde-alva         ###   ########.fr       */
+/*   Updated: 2022/03/28 12:57:07 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_init_semaphores(t_semaphores *semaphores, int num_philo)
 {
 	if (ft_init_semaphore(&semaphores->sem_fork, "/sem_fork", num_philo))
 		return (1);
-	if (ft_init_semaphore(&semaphores->sem_print, "/sem_print", 1))
+	if (ft_init_semaphore(&semaphores->sem_critical, "/sem_critical", 1))
 	{
 		sem_unlink("/sem_fork");
 		sem_close(semaphores->sem_fork);
@@ -27,9 +27,9 @@ int	ft_init_semaphores(t_semaphores *semaphores, int num_philo)
 	if (ft_init_semaphore(&semaphores->sem_meals, "/sem_meals", 0))
 	{
 		sem_unlink("/sem_fork");
-		sem_unlink("/sem_print");
+		sem_unlink("/sem_critical");
 		sem_close(semaphores->sem_fork);
-		sem_close(semaphores->sem_print);
+		sem_close(semaphores->sem_critical);
 		return (1);
 	}
 	return (0);

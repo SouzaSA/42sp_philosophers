@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_destroy_semaphores_bonus.c                      :+:      :+:    :+:   */
+/*   ft_msleep_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/23 19:13:09 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/03/28 12:57:36 by sde-alva         ###   ########.fr       */
+/*   Created: 2022/03/28 13:53:47 by sde-alva          #+#    #+#             */
+/*   Updated: 2022/03/28 13:55:12 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_philo_bonus.h"
 
-void	ft_destroy_semaphores(t_semaphores *semaphores)
+void	ft_msleep(long sleep_time)
 {
-	sem_unlink("/sem_fork");
-	sem_unlink("/sem_critical");
-	sem_unlink("/sem_meals");
-	sem_close(semaphores->sem_fork);
-	sem_close(semaphores->sem_critical);
-	sem_close(semaphores->sem_meals);
+	long	current;
+
+	current = ft_get_time_msec();
+	usleep((sleep_time - 2) * 1000);
+	while (current + sleep_time > ft_get_time_msec())
+		usleep(50);
 }

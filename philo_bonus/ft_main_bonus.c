@@ -6,7 +6,7 @@
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 18:26:57 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/03/28 01:48:48 by sde-alva         ###   ########.fr       */
+/*   Updated: 2022/03/28 15:46:55 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int argc, char **argv)
 	{
 		if (ft_load_table(argc, argv, &table))
 		{
-			write(2, "error: invalid variables\n", 29);
+			write(2, "error: invalid variables\n", 26);
 			return (1);
 		}
 		ft_philosophers(&table);

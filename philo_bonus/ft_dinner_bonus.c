@@ -6,16 +6,16 @@
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 18:49:15 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/03/28 01:56:40 by sde-alva         ###   ########.fr       */
+/*   Updated: 2022/03/28 15:52:59 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_philo_bonus.h"
 
 static void	*ft_reaper(void *arg);
-static void	ft_msleep(long sleep_time);
 static void	ft_philo_actions(t_philo *philo);
-static void	ft_clean_exit(t_philo *philo);
+static void	ft_stop_dinner(t_philo *philo);
+static void	ft_meal_checker(t_philo *philo);
 
 void	ft_dinner(t_philo *philo)
 {
@@ -32,75 +32,72 @@ void	ft_dinner(t_philo *philo)
 
 static void	*ft_reaper(void *philo_void)
 {
-	int		i;
+	int		keep_dinning;
+	long	last_meal;
 	t_philo	*philo;
 
+	keep_dinning = 1;
 	philo = (t_philo *)philo_void;
-	philo->time_meal = ft_get_time_msec();
-	while (philo->keep_dinning)
+	ft_set_last_meal_time(philo);
+	while (keep_dinning)
 	{
-		usleep(1000);
-		if (philo->time_meal + philo->stats->time_to_die <= ft_get_time_msec())
+		usleep(500);
+		ft_get_last_meal_time(philo, &last_meal);
+		if (last_meal + philo->stats->time_to_die <= ft_get_time_msec())
 		{
-			ft_put_msg("died", philo, 1);
-			philo->keep_dinning = 0;
-			i = 0;
-			while (i < philo->table->stats.num_philo)
-			{
-				sem_post(philo->semaphores->sem_meals);
-				i++;
-			}
+			ft_stop_dinner(philo);
 			break ;
 		}
+		ft_get_keep_dinnig(philo, &keep_dinning);
 	}
 	return (NULL);
 }
 
-static void	ft_msleep(long sleep_time)
+static void	ft_stop_dinner(t_philo *philo)
 {
-	long	current;
+	int	i;
 
-	current = ft_get_time_msec();
-	usleep((sleep_time - 2) * 1000);
-	while (current + sleep_time > ft_get_time_msec())
-		usleep(50);
+	ft_put_msg("died", philo);
+	ft_set_keep_dinning(philo);
+	i = 0;
+	while (i < philo->table->stats.num_philo)
+	{
+		sem_post(philo->semaphores->sem_meals);
+		i++;
+	}
 }
 
 static void	ft_philo_actions(t_philo *philo)
 {
-	ft_put_msg("is thinking", philo, 0);
+	ft_put_msg("is thinking", philo);
 	while (1)
 	{
 		usleep(100);
-		ft_put_msg("has taken a fork", philo, 0);
+		ft_put_msg("has taken a fork", philo);
 		sem_wait(philo->semaphores->sem_fork);
-		ft_put_msg("has taken a fork", philo, 0);
+		ft_put_msg("has taken a fork", philo);
 		sem_wait(philo->semaphores->sem_fork);
-		ft_put_msg("is eating", philo, 0);
+		ft_put_msg("is eating", philo);
 		ft_set_last_meal(philo);
-		if (philo->stats->meals_counter
-			&& philo->philo_meals == philo->stats->num_meals)
-		{
-			philo->keep_dinning = 0;
-			sem_post(philo->semaphores->sem_meals);
-		}
+		if (philo->stats->meals_counter)
+			ft_meal_checker(philo);
 		ft_msleep(philo->stats->time_to_eat);
 		sem_post(philo->semaphores->sem_fork);
 		sem_post(philo->semaphores->sem_fork);
-		ft_put_msg("is sleeping", philo, 0);
+		ft_put_msg("is sleeping", philo);
 		ft_msleep(philo->stats->time_to_sleep);
-		ft_put_msg("is thinking", philo, 0);
+		ft_put_msg("is thinking", philo);
 	}
 }
 
-static void	ft_clean_exit(t_philo *philo)
+static void	ft_meal_checker(t_philo *philo)
 {
-	sem_unlink("/sem_fork");
-	sem_unlink("/sem_print");
-	sem_unlink("/sem_meals");
-	sem_close(philo->semaphores->sem_fork);
-	sem_close(philo->semaphores->sem_print);
-	sem_close(philo->semaphores->sem_meals);
-	ft_destroy_table(philo->table);
-	exit(0);
+	int	num_meals;
+
+	ft_get_last_meal_num(philo, &num_meals);
+	if (num_meals == philo->stats->num_meals)
+	{
+		ft_set_keep_dinning(philo);
+		sem_post(philo->semaphores->sem_meals);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 11:39:56 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/03/25 14:46:07 by sde-alva         ###   ########.fr       */
+/*   Updated: 2022/03/28 15:44:58 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int	ft_load_table(int argc, char **argv, t_table *table)
 static int	ft_load_stats(t_stats *stats, int argc, char **argv)
 {
 	stats->num_philo = ft_atoi(argv[1]);
+	if (stats->num_philo <= 0)
+		return (1);
 	stats->time_to_die = ft_atoi(argv[2]);
 	stats->time_to_eat = ft_atoi(argv[3]);
 	stats->time_to_sleep = ft_atoi(argv[4]);

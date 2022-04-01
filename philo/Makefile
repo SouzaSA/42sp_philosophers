@@ -6,7 +6,7 @@
 #    By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/19 14:48:03 by sde-alva          #+#    #+#              #
-#    Updated: 2022/03/28 12:34:47 by sde-alva         ###   ########.fr        #
+#    Updated: 2022/04/01 20:07:35 by sde-alva         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,5 +58,5 @@ fclean: 			clean
 
 re:					fclean all
 
-.PHONY:				all bonus san clean fclean re
+.PHONY:				all clean fclean re
 

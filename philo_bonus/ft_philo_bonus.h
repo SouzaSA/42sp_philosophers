@@ -6,7 +6,7 @@
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 18:27:34 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/03/28 15:43:10 by sde-alva         ###   ########.fr       */
+/*   Updated: 2022/04/01 19:38:58 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@
 # include <sys/time.h>
 # include <pthread.h>
 # include <semaphore.h>
-# include <signal.h>
 # include <fcntl.h>
-# include <sys/stat.h>
 # include <sys/wait.h>
 
 typedef struct s_stats
@@ -84,5 +82,4 @@ void	ft_set_keep_dinning(t_philo *philo);
 void	ft_set_last_meal_time(t_philo *philo);
 void	ft_set_last_meal(t_philo *philo);
 size_t	ft_strlen(const char *s);
-
 #endif

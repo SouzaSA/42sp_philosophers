@@ -6,7 +6,7 @@
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 11:40:47 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/03/28 12:35:21 by sde-alva         ###   ########.fr       */
+/*   Updated: 2022/04/01 19:20:43 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,10 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <sys/time.h>
-# include <time.h>
 # include <unistd.h>
 
 # define PHILO_ALIVE 0
 # define PHILO_DIED 1
-# define PHILO_PLEASED 2
 
 typedef struct s_stats
 {

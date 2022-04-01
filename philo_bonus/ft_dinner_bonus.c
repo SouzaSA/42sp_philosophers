@@ -6,7 +6,7 @@
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 18:49:15 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/04/01 21:45:26 by sde-alva         ###   ########.fr       */
+/*   Updated: 2022/04/01 22:15:47 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ static void	ft_stop_dinner(t_philo *philo)
 
 static void	ft_philo_actions(t_philo *philo)
 {
-	ft_put_msg("is thinking", philo);
 	while (1)
 	{
 		usleep(100);

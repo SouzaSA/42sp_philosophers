@@ -6,7 +6,7 @@
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 18:45:15 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/04/01 22:01:42 by sde-alva         ###   ########.fr       */
+/*   Updated: 2022/04/01 22:15:23 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ static void	ft_philo_actions(t_philo *philo)
 	int	dead_flag;
 
 	dead_flag = 0;
-	ft_print_action("is thinking", philo);
 	while (!dead_flag)
 	{
 		usleep(200);

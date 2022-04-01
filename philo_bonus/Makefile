@@ -2,7 +2,7 @@
 
 NAME				=	philo_bonus
 
-CC					=	cc -fsanitize=thread -g3
+CC					=	cc #-fsanitize=thread -g3
 CFLAGS				=	-Wall -Wextra -Werror
 LIBS				=	-pthread
 
@@ -39,6 +39,9 @@ ${NAME}:			${OBJS}
 					${CC} ${CFLAGS} ${OBJS} ${LIBS} -o ${NAME}
 
 all:				${NAME}
+
+san:				${OBJS}
+					${CC} ${SAN} ${CFLAGS} ${OBJS} ${LIBS} -o ${NAME}
 
 clean:
 					${RM} ${OBJS}

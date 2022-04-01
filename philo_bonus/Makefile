@@ -2,7 +2,7 @@
 
 NAME				=	philo_bonus
 
-CC					=	cc #-fsanitize=thread -g3
+CC					=	cc -g #-fsanitize=thread -g3
 CFLAGS				=	-Wall -Wextra -Werror
 LIBS				=	-pthread
 

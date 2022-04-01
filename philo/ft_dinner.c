@@ -6,7 +6,7 @@
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 18:45:15 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/03/28 12:36:03 by sde-alva         ###   ########.fr       */
+/*   Updated: 2022/04/01 21:26:39 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ static int	ft_take_forks(t_philo *philo)
 {
 	if (philo->stats->num_philo == 1)
 	{
+		ft_print_action("has taken a fork", philo);
 		ft_msleep(philo->stats->time_to_die + 1);
 		return (1);
 	}

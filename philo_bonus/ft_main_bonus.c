@@ -6,7 +6,7 @@
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 18:26:57 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/03/28 15:46:55 by sde-alva         ###   ########.fr       */
+/*   Updated: 2022/04/01 21:40:04 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,7 @@ int	main(int argc, char **argv)
 	if ((argc == 5 || argc == 6) && ft_check_args(argv))
 	{
 		if (ft_load_table(argc, argv, &table))
-		{
-			write(2, "error: invalid variables\n", 26);
 			return (1);
-		}
 		ft_philosophers(&table);
 	}
 	else

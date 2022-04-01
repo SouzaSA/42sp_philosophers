@@ -6,7 +6,7 @@
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 18:45:15 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/04/01 21:26:39 by sde-alva         ###   ########.fr       */
+/*   Updated: 2022/04/01 22:01:42 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	*ft_dinner(void *philo_void)
 	t_philo	*philo;
 
 	philo = (t_philo *)philo_void;
-	if (philo->id % 2 == 1)
+	if (philo->id % 2 == 0)
 		usleep(100);
 	ft_philo_actions(philo);
 	return (NULL);

@@ -6,7 +6,7 @@
 #    By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/19 14:48:03 by sde-alva          #+#    #+#              #
-#    Updated: 2022/04/02 18:29:21 by sde-alva         ###   ########.fr        #
+#    Updated: 2022/04/01 23:31:55 by sde-alva         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 
 NAME				=	philo
 
-CC					=	cc #-fsanitize=thread -g3
+CC					=	cc
 CFLAGS				=	-Wall -Wextra -Werror
 LIBS				=	-l pthread
 

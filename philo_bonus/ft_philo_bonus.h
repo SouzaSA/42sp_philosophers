@@ -6,7 +6,7 @@
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 18:27:34 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/04/01 19:38:58 by sde-alva         ###   ########.fr       */
+/*   Updated: 2022/04/02 18:25:31 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@
 # include <semaphore.h>
 # include <fcntl.h>
 # include <sys/wait.h>
+
+# define ALIVE 1
+# define DEAD 0
 
 typedef struct s_stats
 {
@@ -42,7 +45,6 @@ typedef struct s_semaphores
 typedef struct s_philo
 {
 	int				id;
-	int				keep_dinning;
 	int				philo_meals;
 	long			time_meal;
 	long			*time_start;
@@ -67,7 +69,6 @@ int		ft_check_args(char **argv);
 void	ft_clean_exit(t_philo *philo);
 void	ft_destroy_semaphores(t_semaphores *semaphores);
 void	ft_dinner(t_philo *philo);
-void	ft_get_keep_dinnig(t_philo *philo, int *dinning);
 void	ft_get_last_meal_time(t_philo *philo, long *time);
 void	ft_get_last_meal_num(t_philo *philo, int *num);
 long	ft_get_time_msec(void);
@@ -77,8 +78,7 @@ int		ft_load_table(int argc, char **argv, t_table *table);
 int		ft_init_semaphores(t_semaphores *semaphores, int num_philo);
 int		ft_philosophers(t_table	*table);
 void	ft_msleep(long sleep_time);
-void	ft_put_msg(char *msg, t_philo *philo);
-void	ft_set_keep_dinning(t_philo *philo);
+void	ft_put_msg(char *msg, t_philo *philo, int status);
 void	ft_set_last_meal_time(t_philo *philo);
 void	ft_set_last_meal(t_philo *philo);
 size_t	ft_strlen(const char *s);

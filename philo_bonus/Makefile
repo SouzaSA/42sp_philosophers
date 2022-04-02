@@ -2,7 +2,7 @@
 
 NAME				=	philo_bonus
 
-CC					=	cc -g #-fsanitize=thread -g3
+CC					=	cc
 CFLAGS				=	-Wall -Wextra -Werror
 LIBS				=	-pthread
 
@@ -11,7 +11,6 @@ SRCS				=	ft_atoi_bonus.c	\
 						ft_clean_exit.c	\
 						ft_destroy_semaphores_bonus.c	\
 						ft_dinner_bonus.c	\
-						ft_get_keep_dinning.c	\
 						ft_get_last_meal_time_bonus.c	\
 						ft_get_num_meals_bonus.c	\
 						ft_get_time_msec_bonus.c	\
@@ -23,7 +22,6 @@ SRCS				=	ft_atoi_bonus.c	\
 						ft_msleep_bonus.c	\
 						ft_philosophers_bonus.c	\
 						ft_put_msg_bonus.c	\
-						ft_set_keep_dinning.c	\
 						ft_set_last_meal_bonus.c	\
 						ft_set_last_meal_time_bonus.c	\
 						ft_strlen_bonus.c

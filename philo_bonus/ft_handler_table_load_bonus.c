@@ -6,7 +6,7 @@
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 11:39:56 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/03/28 15:44:58 by sde-alva         ###   ########.fr       */
+/*   Updated: 2022/04/03 16:42:38 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ static int	ft_load_stats(t_stats *stats, int argc, char **argv)
 	{
 		stats->meals_counter = 1;
 		stats->num_meals = ft_atoi(argv[5]);
+		if (stats->num_meals == 0)
+			return (1);
 	}
 	return (0);
 }

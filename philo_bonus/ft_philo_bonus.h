@@ -6,7 +6,7 @@
 /*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 18:27:34 by sde-alva          #+#    #+#             */
-/*   Updated: 2022/04/02 18:25:31 by sde-alva         ###   ########.fr       */
+/*   Updated: 2022/04/03 22:41:33 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ typedef struct s_table
 
 int		ft_atoi(const char *nptr);
 int		ft_check_args(char **argv);
-void	ft_clean_exit(t_philo *philo);
+void	ft_clean_exit(t_philo *philo, int code);
 void	ft_destroy_semaphores(t_semaphores *semaphores);
 void	ft_dinner(t_philo *philo);
 void	ft_get_last_meal_time(t_philo *philo, long *time);
